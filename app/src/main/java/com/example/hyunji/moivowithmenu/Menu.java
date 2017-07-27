@@ -24,22 +24,11 @@ public class Menu extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.alarm:
 //                    mTextMessage.setText(R.string.title_home);
-                    setAlarmViewGroup = findViewById(R.id.settingAlarmView);
 
-                    if (setAlarmViewGroup.getVisibility() == View.VISIBLE ){
                         Intent alarmIntent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(alarmIntent);
                         overridePendingTransition(0, 0);
                         return true;
-                    } else {
-
-                    }
-
-
-//                    Intent alarmIntent = new Intent(getBaseContext(), MainActivity.class);
-//                    startActivity(alarmIntent);
-//                    overridePendingTransition(0, 0);
-//                    return true;
 
 
 

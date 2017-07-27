@@ -283,7 +283,7 @@ public class MainActivity extends Menu {
 
                 Log.e("The sound id is", String.valueOf(selectedAlarmSound));
 
-                setAlarmViewGroup.setVisibility(View.INVISIBLE);
+                setAlarmViewGroup.setVisibility(View.GONE);
                 cancelAlarmViewGroup.setVisibility(View.VISIBLE);
 
 //                alarmOn.setVisibility(View.INVISIBLE);
