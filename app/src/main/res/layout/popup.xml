@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hyunji.moivowithmenu.MainActivity">
+
+
+    <Button
+        android:id="@+id/turnOffAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick=""
+        android:text="OK"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="187dp"
+        android:background="@drawable/rectangle"
+        style="@style/buttonStyle"/>
+
+
+    <TextView
+        android:id="@+id/popTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/turnOffAlarm"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="71dp"
+        android:gravity="center"
+        android:text="Turn off Alarm \n and \n Show me the Weather"/>
+
+
+</RelativeLayout>

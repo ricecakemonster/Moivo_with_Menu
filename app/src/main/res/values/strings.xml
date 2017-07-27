@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MoivoWithMenu</string>
+
+    <string name="action_settings">Settings</string>
+
+
+    <string-array name="alarmSounds">
+        <item>banana</item>
+        <item>legomovie</item>
+        <item>minion</item>
+    </string-array>
+
+    <string name="title_activity_weather">Weather</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string name="alarm">Alarm</string>
+    <string name="weather">Weather</string>
+
+</resources>
