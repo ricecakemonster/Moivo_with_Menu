@@ -12,8 +12,8 @@
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="469dp"
-        android:layout_weight=".9"
+        android:layout_height="match_parent"
+        android:layout_weight="0.92"
         android:background="@android:color/holo_orange_light"
         android:orientation="vertical">
 
@@ -243,7 +243,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="0.16"
                     android:background="@drawable/rectangle"
-                    android:onClick=""
+                    android:onClick="onAlarmOn"
                     android:paddingHorizontal="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -286,7 +286,7 @@
                 style="@style/buttonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/turnOffMessage"
+                android:layout_below="@+id/turnOffMessage1"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
@@ -307,9 +307,8 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight=".1"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
 

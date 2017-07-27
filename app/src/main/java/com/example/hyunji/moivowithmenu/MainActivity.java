@@ -1,6 +1,5 @@
 package com.example.hyunji.moivowithmenu;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -23,7 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +35,7 @@ public class MainActivity extends Menu {
     AlarmManager alarmManager;
     TextView updateText;
     TextView turnOffMessage;
+    TextView  turnOffMessage1;
     LinearLayout settingAlarmView;
     RelativeLayout cancelAlarmView;
 
@@ -49,6 +48,7 @@ public class MainActivity extends Menu {
     private PendingIntent pendingIntent;
     private PendingIntent pendingIntentOnGoing;
     private Spinner spinner;
+    TimePicker myTimePicker;
     int selectedAlarmSound;
     int hour;
     int minute;
@@ -61,6 +61,8 @@ public class MainActivity extends Menu {
     final ArrayList<Integer> checkedDaysNum = new ArrayList<>();
     final ArrayList<Calendar> calendars = new ArrayList<>();
     Calendar[] calendarArray = {myCal, myCal1, myCal2, myCal3, myCal4, myCal5, myCal6};
+    Button cancelAlarm1;
+    Intent myIntent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -123,7 +125,7 @@ public class MainActivity extends Menu {
         repeatButton = (TextView)findViewById(R.id.repeat);
 
         updateText = (TextView) findViewById(R.id.updateText);
-        turnOffMessage = (TextView) findViewById(R.id.turnOffMessage);
+        turnOffMessage = (TextView) findViewById(R.id.turnOffMessage1);
 
         sunday.setTypeface(typefaceLorem);
         monday.setTypeface(typefaceLorem);
@@ -133,7 +135,6 @@ public class MainActivity extends Menu {
         friday.setTypeface(typefaceLorem);
         saturday.setTypeface(typefaceLorem);
         updateText.setTypeface(typefaceLorem);
-        turnOffMessage.setTypeface(typefaceLorem);
 
         spinner = (Spinner) findViewById(R.id.spinner);
 
@@ -159,187 +160,354 @@ public class MainActivity extends Menu {
         myCal = Calendar.getInstance();
 
 
-        final Intent myIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        myIntent = new Intent(MainActivity.this, AlarmReceiver.class);
 
         final Intent changeViewIntent = new Intent(MainActivity.this, PopUp.class);
 
 
         final Button alarmOn = (Button) findViewById(R.id.alarmOn);
-        final Button cancelAlarm = (Button) findViewById(R.id.cancel);
-        final TimePicker myTimePicker = (TimePicker) findViewById(R.id.timePicker);
+        final Button cancelAlarm1 = (Button) findViewById(R.id.cancel1);
         final TextView alarmSetupTextView = (TextView) findViewById(R.id.alarmSetupTextView);
-        final TextView turnOffMessage = (TextView) findViewById(R.id.turnOffMessage);
+        final TextView turnOffMessage = (TextView) findViewById(R.id.turnOffMessage1);
 
 
-        alarmOn.setOnClickListener(new View.OnClickListener(){
+//        alarmOn.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View view){
+//
+//
+//                myIntent.putExtra("onOff", "alarm on");
+//
+//                myIntent.putExtra("soundChoice", selectedAlarmSound);
+//
+//                if (Build.VERSION.SDK_INT >= 23) {
+//                    myCal.set(Calendar.HOUR_OF_DAY, myTimePicker.getHour());
+//                    myCal.set(Calendar.MINUTE, myTimePicker.getMinute());
+//
+//                } else {
+//                    myCal.set(Calendar.HOUR_OF_DAY, myTimePicker.getCurrentHour());
+//                    myCal.set(Calendar.MINUTE, myTimePicker.getCurrentMinute());
+//                }
+//
+//
+//                String[] dayTextViewArray = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
+//
+//                for(int i=0; i<7; i++){
+//                    String day = String.valueOf(dayTextViewArray[i]);
+//                    int layoutID = getResources().getIdentifier(day, "id", getPackageName());
+//
+//                    TextView textView = (TextView) findViewById(layoutID);
+//
+//                    ColorDrawable colorDrawable = (ColorDrawable) textView.getBackground();
+//                    int colorCode = colorDrawable.getColor();
+//                    int dayNumber = 0;
+//
+//                    if (colorCode == Color.parseColor("#ffff8800")){
+//                        switch (day) {
+//                            case "sunday":
+//                                dayNumber = 1;
+//                                break;
+//                            case "monday":
+//                                dayNumber = 2;
+//                                break;
+//                            case "tuesday":
+//                                dayNumber = 3;
+//                                break;
+//                            case "wednesday":
+//                                dayNumber = 4;
+//                                break;
+//                            case "thursday":
+//                                dayNumber = 5;
+//                                break;
+//                            case "friday":
+//                                dayNumber = 6;
+//                                break;
+//                            case "saturday":
+//                                dayNumber = 7;
+//                                break;
+//
+//                        }
+//                        checkedDays.add(day);
+//                        checkedDaysNum.add(dayNumber);
+//                    }
+//                }
+//
+//    // if the alarm is set for 7pm and it's already 7:01pm = > alarm is set for 7pm tomorrow.
+//                if (checkedDays.size() == 0){
+////                    if(myCal.getTimeInMillis() < System.currentTimeMillis()) {
+////                        myCal.add(Calendar.DAY_OF_YEAR, 1);
+////                    }
+//                    pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                    alarmManager.set(AlarmManager.RTC_WAKEUP, myCal.getTimeInMillis(), pendingIntent);
+//                    Log.e("where?", "I'm here! No repeating alarms");
+//                }
+//
+//                //repeating alarms
+//                else {
+//                    for (int i = 0; i < checkedDays.size(); i++) {
+//                        if (checkedDays.size() == 1) {
+//                            myCal.set(Calendar.DAY_OF_WEEK, checkedDaysNum.get(i));
+//                            if(myCal.getTimeInMillis() < System.currentTimeMillis()) {
+//                                myCal.add(Calendar.DAY_OF_YEAR, 7);
+//                            }
+//                            calendars.add(myCal);
+//                        } else if (checkedDays.size() > 1) {
+//                            calendarArray[i] = (Calendar) myCal.clone();
+//                            calendarArray[i].set(Calendar.DAY_OF_WEEK, checkedDaysNum.get(i));
+//                            if(calendarArray[i].getTimeInMillis() < System.currentTimeMillis()) {
+//                                calendarArray[i].add(Calendar.DAY_OF_YEAR, 7);
+//                            }
+//                            calendars.add(calendarArray[i]);
+//                        }
+//                    }
+//
+//
+//                    for (int i = 0; i < calendars.size(); i++) {
+//                        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, i,
+//                                myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendars.get(i).getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+//                        Log.e("where?", "I'm here! Repeating alarms");
+//
+//
+//                    }
+//                }
+////
+////                turnOffMessage.setVisibility(View.VISIBLE);
+////                updateText.setVisibility(View.INVISIBLE);
+//
+//
+//                setContentView(R.layout.alarm_set);
+//                turnOffMessage1 = (TextView) findViewById(R.id.turnOffMessage1);
+//                Button cancelAlarm1 =(Button) findViewById(R.id.cancel1);
+//                turnOffMessage1.setTypeface(typefaceLorem);
+//
+//                cancelAlarmText("Alarm set for ");
+//
+//
+//                Log.e("The sound id is", String.valueOf(selectedAlarmSound));
+////
+////                setAlarmViewGroup.setVisibility(View.GONE);
+////                cancelAlarmViewGroup.setVisibility(View.VISIBLE);
+//
+////                alarmOn.setVisibility(View.INVISIBLE);
+////                cancelAlarm.setVisibility(View.VISIBLE);
+////                spinner.setVisibility(View.INVISIBLE);
+////                myTimePicker.setVisibility(View.INVISIBLE);
+////                alarmSetupTextView.setVisibility(View.INVISIBLE);
+////
+////                sunday.setVisibility(View.INVISIBLE);
+////                monday.setVisibility(View.INVISIBLE);
+////                tuesday.setVisibility(View.INVISIBLE);
+////                wednesday.setVisibility(View.INVISIBLE);
+////                thursday.setVisibility(View.INVISIBLE);
+////                friday.setVisibility(View.INVISIBLE);
+////                saturday.setVisibility(View.INVISIBLE);
+////                repeatButton.setVisibility(View.INVISIBLE);
+//            }
+//        });
 
-            @Override
-            public void onClick(View view){
 
 
-                myIntent.putExtra("onOff", "alarm on");
 
-                myIntent.putExtra("soundChoice", selectedAlarmSound);
+        //=========
 
-                if (Build.VERSION.SDK_INT >= 23) {
-                    myCal.set(Calendar.HOUR_OF_DAY, myTimePicker.getHour());
-                    myCal.set(Calendar.MINUTE, myTimePicker.getMinute());
 
-                } else {
-                    myCal.set(Calendar.HOUR_OF_DAY, myTimePicker.getCurrentHour());
-                    myCal.set(Calendar.MINUTE, myTimePicker.getCurrentMinute());
+
+
+
+
+        //==========
+
+
+
+//        cancelAlarm1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                setContentView(R.layout.activity_main);
+//
+//                pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 1,
+//                        myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//                if (alarmManager!= null) {
+//                    alarmManager.cancel(pendingIntent);
+//                }
+//
+//
+//
+//                // cancel alarms
+//                resetAlarmText("Alarm Canceled for ");
+////                turnOffMessage.setVisibility(View.INVISIBLE);
+////                updateText.setVisibility(View.VISIBLE);
+//
+//                updateText.setText("Alarm Canceled.\nSet New Alarm");
+//                setAlarmViewGroup.setVisibility(View.VISIBLE);
+//                cancelAlarmViewGroup.setVisibility(View.INVISIBLE);
+////                alarmOn.setVisibility(View.VISIBLE);
+////                cancelAlarm.setVisibility(View.INVISIBLE);
+////                spinner.setVisibility(View.VISIBLE);
+////                myTimePicker.setVisibility(View.VISIBLE);
+////                sunday.setVisibility(View.VISIBLE);
+////                monday.setVisibility(View.VISIBLE);
+////                tuesday.setVisibility(View.VISIBLE);
+////                wednesday.setVisibility(View.VISIBLE);
+////                thursday.setVisibility(View.VISIBLE);
+////                friday.setVisibility(View.VISIBLE);
+////                saturday.setVisibility(View.VISIBLE);
+//
+////                alarmSetupTextView.setVisibility(View.VISIBLE);
+//                checkedDays.clear();
+//            }
+//        });
+
+    }
+
+    public void onAlarmOn(View v){
+        myTimePicker = (TimePicker) findViewById(R.id.timePicker);
+
+        myIntent.putExtra("onOff", "alarm on");
+
+        myIntent.putExtra("soundChoice", selectedAlarmSound);
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            myCal.set(Calendar.HOUR_OF_DAY, myTimePicker.getHour());
+            myCal.set(Calendar.MINUTE, myTimePicker.getMinute());
+
+        } else {
+            myCal.set(Calendar.HOUR_OF_DAY, myTimePicker.getCurrentHour());
+            myCal.set(Calendar.MINUTE, myTimePicker.getCurrentMinute());
+        }
+
+
+        String[] dayTextViewArray = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
+
+        for(int i=0; i<7; i++){
+            String day = String.valueOf(dayTextViewArray[i]);
+            int layoutID = getResources().getIdentifier(day, "id", getPackageName());
+
+            TextView textView = (TextView) findViewById(layoutID);
+
+            ColorDrawable colorDrawable = (ColorDrawable) textView.getBackground();
+            int colorCode = colorDrawable.getColor();
+            int dayNumber = 0;
+
+            if (colorCode == Color.parseColor("#ffff8800")){
+                switch (day) {
+                    case "sunday":
+                        dayNumber = 1;
+                        break;
+                    case "monday":
+                        dayNumber = 2;
+                        break;
+                    case "tuesday":
+                        dayNumber = 3;
+                        break;
+                    case "wednesday":
+                        dayNumber = 4;
+                        break;
+                    case "thursday":
+                        dayNumber = 5;
+                        break;
+                    case "friday":
+                        dayNumber = 6;
+                        break;
+                    case "saturday":
+                        dayNumber = 7;
+                        break;
+
                 }
+                checkedDays.add(day);
+                checkedDaysNum.add(dayNumber);
+            }
+        }
 
-
-                String[] dayTextViewArray = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
-
-                for(int i=0; i<7; i++){
-                    String day = String.valueOf(dayTextViewArray[i]);
-                    int layoutID = getResources().getIdentifier(day, "id", getPackageName());
-
-                    TextView textView = (TextView) findViewById(layoutID);
-
-                    ColorDrawable colorDrawable = (ColorDrawable) textView.getBackground();
-                    int colorCode = colorDrawable.getColor();
-                    int dayNumber = 0;
-
-                    if (colorCode == Color.parseColor("#ffff8800")){
-                        switch (day) {
-                            case "sunday":
-                                dayNumber = 1;
-                                break;
-                            case "monday":
-                                dayNumber = 2;
-                                break;
-                            case "tuesday":
-                                dayNumber = 3;
-                                break;
-                            case "wednesday":
-                                dayNumber = 4;
-                                break;
-                            case "thursday":
-                                dayNumber = 5;
-                                break;
-                            case "friday":
-                                dayNumber = 6;
-                                break;
-                            case "saturday":
-                                dayNumber = 7;
-                                break;
-
-                        }
-                        checkedDays.add(day);
-                        checkedDaysNum.add(dayNumber);
-                    }
-                }
-
-    // if the alarm is set for 7pm and it's already 7:01pm = > alarm is set for 7pm tomorrow.
-                if (checkedDays.size() == 0){
+        // if the alarm is set for 7pm and it's already 7:01pm = > alarm is set for 7pm tomorrow.
+        if (checkedDays.size() == 0){
 //                    if(myCal.getTimeInMillis() < System.currentTimeMillis()) {
 //                        myCal.add(Calendar.DAY_OF_YEAR, 1);
 //                    }
-                    pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, myCal.getTimeInMillis(), pendingIntent);
-                    Log.e("where?", "I'm here! No repeating alarms");
-                }
+            pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, myCal.getTimeInMillis(), pendingIntent);
+            Log.e("where?", "I'm here! No repeating alarms");
+        }
 
-                //repeating alarms
-                else {
-                    for (int i = 0; i < checkedDays.size(); i++) {
-                        if (checkedDays.size() == 1) {
-                            myCal.set(Calendar.DAY_OF_WEEK, checkedDaysNum.get(i));
-                            if(myCal.getTimeInMillis() < System.currentTimeMillis()) {
-                                myCal.add(Calendar.DAY_OF_YEAR, 7);
-                            }
-                            calendars.add(myCal);
-                        } else if (checkedDays.size() > 1) {
-                            calendarArray[i] = (Calendar) myCal.clone();
-                            calendarArray[i].set(Calendar.DAY_OF_WEEK, checkedDaysNum.get(i));
-                            if(calendarArray[i].getTimeInMillis() < System.currentTimeMillis()) {
-                                calendarArray[i].add(Calendar.DAY_OF_YEAR, 7);
-                            }
-                            calendars.add(calendarArray[i]);
-                        }
+        //repeating alarms
+        else {
+            for (int i = 0; i < checkedDays.size(); i++) {
+                if (checkedDays.size() == 1) {
+                    myCal.set(Calendar.DAY_OF_WEEK, checkedDaysNum.get(i));
+                    if(myCal.getTimeInMillis() < System.currentTimeMillis()) {
+                        myCal.add(Calendar.DAY_OF_YEAR, 7);
                     }
-
-
-                    for (int i = 0; i < calendars.size(); i++) {
-                        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, i,
-                                myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendars.get(i).getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
-                        Log.e("where?", "I'm here! Repeating alarms");
-
-
+                    calendars.add(myCal);
+                } else if (checkedDays.size() > 1) {
+                    calendarArray[i] = (Calendar) myCal.clone();
+                    calendarArray[i].set(Calendar.DAY_OF_WEEK, checkedDaysNum.get(i));
+                    if(calendarArray[i].getTimeInMillis() < System.currentTimeMillis()) {
+                        calendarArray[i].add(Calendar.DAY_OF_YEAR, 7);
                     }
+                    calendars.add(calendarArray[i]);
                 }
+            }
+
+
+            for (int i = 0; i < calendars.size(); i++) {
+                pendingIntent = PendingIntent.getBroadcast(MainActivity.this, i,
+                        myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendars.get(i).getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+                Log.e("where?", "I'm here! Repeating alarms");
+
+
+            }
+        }
 //
 //                turnOffMessage.setVisibility(View.VISIBLE);
 //                updateText.setVisibility(View.INVISIBLE);
 
 
-                cancelAlarmText("Alarm set for ");
+        setContentView(R.layout.alarm_set);
+        turnOffMessage1 = (TextView) findViewById(R.id.turnOffMessage1);
+        Button cancelAlarm1 =(Button) findViewById(R.id.cancel1);
+        turnOffMessage1.setTypeface(typefaceLorem);
+
+        cancelAlarmText("Alarm set for ");
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-                Log.e("The sound id is", String.valueOf(selectedAlarmSound));
-
-                setAlarmViewGroup.setVisibility(View.GONE);
-                cancelAlarmViewGroup.setVisibility(View.VISIBLE);
-
-//                alarmOn.setVisibility(View.INVISIBLE);
-//                cancelAlarm.setVisibility(View.VISIBLE);
-//                spinner.setVisibility(View.INVISIBLE);
-//                myTimePicker.setVisibility(View.INVISIBLE);
-//                alarmSetupTextView.setVisibility(View.INVISIBLE);
-//
-//                sunday.setVisibility(View.INVISIBLE);
-//                monday.setVisibility(View.INVISIBLE);
-//                tuesday.setVisibility(View.INVISIBLE);
-//                wednesday.setVisibility(View.INVISIBLE);
-//                thursday.setVisibility(View.INVISIBLE);
-//                friday.setVisibility(View.INVISIBLE);
-//                saturday.setVisibility(View.INVISIBLE);
-//                repeatButton.setVisibility(View.INVISIBLE);
-            }
-        });
-
-
-        cancelAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 1,
-                        myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                if (alarmManager!= null) {
-                    alarmManager.cancel(pendingIntent);
-                }
+        Log.e("The sound id is", String.valueOf(selectedAlarmSound));
 
 
 
-                // cancel alarms
-                resetAlarmText("Alarm Canceled for ");
-//                turnOffMessage.setVisibility(View.INVISIBLE);
-//                updateText.setVisibility(View.VISIBLE);
 
-                updateText.setText("Alarm Canceled.\nSet New Alarm");
-                setAlarmViewGroup.setVisibility(View.VISIBLE);
-                cancelAlarmViewGroup.setVisibility(View.INVISIBLE);
-//                alarmOn.setVisibility(View.VISIBLE);
-//                cancelAlarm.setVisibility(View.INVISIBLE);
-//                spinner.setVisibility(View.VISIBLE);
-//                myTimePicker.setVisibility(View.VISIBLE);
-//                sunday.setVisibility(View.VISIBLE);
-//                monday.setVisibility(View.VISIBLE);
-//                tuesday.setVisibility(View.VISIBLE);
-//                wednesday.setVisibility(View.VISIBLE);
-//                thursday.setVisibility(View.VISIBLE);
-//                friday.setVisibility(View.VISIBLE);
-//                saturday.setVisibility(View.VISIBLE);
 
-//                alarmSetupTextView.setVisibility(View.VISIBLE);
-                checkedDays.clear();
-            }
-        });
+
+        //==============
+
+
+    }
+
+    public void onCancel(View v) {
+
+        setContentView(R.layout.activity_main);
+
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 1,
+                myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (alarmManager!= null) {
+            alarmManager.cancel(pendingIntent);
+        }
+
+        // cancel alarms
+        resetAlarmText("Alarm Canceled for ");
+        updateText.setText("Alarm Canceled.\nSet New Alarm");
+        setAlarmViewGroup.setVisibility(View.VISIBLE);
+        cancelAlarmViewGroup.setVisibility(View.INVISIBLE);
+        checkedDays.clear();
 
     }
 
@@ -365,7 +533,7 @@ public class MainActivity extends Menu {
 
     private void cancelAlarmText(String s) {
         String string  = showTime(s);
-        turnOffMessage.setText(string);
+        turnOffMessage1.setText(string);
     }
 
     private String showTime(String s){

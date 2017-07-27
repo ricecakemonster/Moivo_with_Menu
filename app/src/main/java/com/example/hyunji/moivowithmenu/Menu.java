@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Menu extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public class Menu extends AppCompatActivity {
 
 
                 case R.id.weather:
+                    Toast.makeText(Menu.this, "Weather button clicked", Toast.LENGTH_SHORT).show();
                     Intent locationIntent = new Intent(getBaseContext(), WeatherLocation.class);
                     locationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(locationIntent);
