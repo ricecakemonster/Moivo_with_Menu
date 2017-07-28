@@ -72,7 +72,7 @@ public class AlarmSoundService extends Service {
         Notification notificationPopUp = new NotificationCompat.Builder(this)
                 .setContentTitle("Wake Up!")
                 .setContentText("Click me!")
-                .setSmallIcon(R.drawable.clock)
+                .setSmallIcon(R.drawable.ic_alarm)
                 .setContentIntent(pendingIntentMainActivity)
                 .setAutoCancel(true)//automatically disappears when you click on it
                 .setSound(soundUri)

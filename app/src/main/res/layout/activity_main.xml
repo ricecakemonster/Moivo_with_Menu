@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
+    android:background="#6b8e23"
     android:orientation="vertical"
     android:weightSum="1"
     tools:context="com.example.hyunji.moivowithmenu.MainActivity">
@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.92"
-        android:background="@android:color/holo_orange_light"
         android:orientation="vertical">
 
         <LinearLayout
@@ -22,7 +21,6 @@
             android:id="@+id/settingAlarmView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_orange_light"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -48,7 +46,7 @@
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white"
-                android:textSize="30sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -105,6 +103,7 @@
                     android:text="S"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#f0fff0"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -118,6 +117,7 @@
                     android:text="M"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#f0fff0"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -132,6 +132,7 @@
                     android:text="T"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#f0fff0"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -145,6 +146,7 @@
                     android:text="W"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#f0fff0"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -158,6 +160,7 @@
                     android:text="T"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#f0fff0"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -171,6 +174,7 @@
                     android:text="F"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#f0fff0"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -184,6 +188,7 @@
                     android:text="S"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#f0fff0"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -215,11 +220,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="3dp"
-                android:layout_weight=".1"
-                android:background="@android:color/background_light"
+                android:background="#9acd32"
                 android:entries="@array/alarmSounds"
                 android:theme="@style/SpinnerText"
                 tools:layout_editor_absoluteX="8dp"
@@ -255,61 +259,24 @@
 
         </LinearLayout>
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/cancelAlarmView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:visibility="invisible">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/turnOffMessage"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_gravity="center_vertical|center_horizontal|center"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_marginRight="20dp"-->
-                <!--android:layout_marginTop="152dp"-->
-                <!--android:autoSizeMaxTextSize="@android:dimen/dialog_min_width_major"-->
-                <!--android:paddingBottom="10dp"-->
-                <!--android:paddingTop="20dp"-->
-                <!--android:textAlignment="center"-->
-                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                <!--android:textColor="@android:color/white"-->
-                <!--android:textSize="30sp"-->
-                <!--android:textStyle="bold"-->
-                <!--android:visibility="visible" />-->
-
-            <!--<Button-->
-                <!--android:id="@+id/cancel"-->
-                <!--style="@style/buttonStyle"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/turnOffMessage1"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:background="@drawable/rectangle"-->
-                <!--android:onClick=""-->
-                <!--android:paddingHorizontal="10dp"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:text="Cancel"-->
-                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                <!--android:visibility="visible" />-->
-
-
-        <!--</RelativeLayout>-->
-
     </RelativeLayout>
+
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:background="?android:attr/windowBackground"-->
+        <!--app:menu="@menu/navigation" />-->
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom|end"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#6b8e23"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
         app:menu="@menu/navigation" />
 
 </LinearLayout>

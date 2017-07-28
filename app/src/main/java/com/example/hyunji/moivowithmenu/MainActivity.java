@@ -183,6 +183,7 @@ public class MainActivity extends BaseActivity {
 
         Intent alarmOnIntent = new Intent(MainActivity.this, AlarmSet.class);
         startActivity(alarmOnIntent);
+        finish(); //disable back button
     }
 
 }

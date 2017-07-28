@@ -24,7 +24,7 @@ public class Weather extends AppCompatActivity {
     float longitude;
     float latitude;
     TextView cityField, detailsField, currentTemperatureField, tempAtNoonField, tempComeHomeField,
-            weatherNowIcon, weatherNoonIcon, weatherComingHomeIcon, noonTextView, homeTextView;
+            weatherNowIcon, weatherNoonIcon, weatherComingHomeIcon, noonTextView, homeTextView, weatherTextView;
     ImageView kidView;
     ImageView umbrellaView;
     Typeface weatherFont;
@@ -34,6 +34,7 @@ public class Weather extends AppCompatActivity {
     int currentTempInt;
     Boolean rain;
     long hotMin, mildMin, mildMax, coolMin, coolMax, coldMin, coldMax;
+    Typeface typefaceLorem;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -83,6 +84,8 @@ public class Weather extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
         getSupportActionBar().hide();
+        typefaceLorem = Typeface.createFromAsset(getAssets(), "fonts/Lorem.ttf");
+
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -113,14 +116,15 @@ public class Weather extends AppCompatActivity {
         weatherComingHomeIcon.setTypeface(weatherFont);
         noonTextView = (TextView)findViewById(R.id.textView5);
         homeTextView = (TextView)findViewById(R.id.textView6);
+        weatherTextView = (TextView)findViewById(R.id.weatherText);
         rain = false;
 
-        hotMin = 23;
-        mildMin = 16;
-        mildMax = 22;
-        coolMin = 10;
-        coolMax = 15;
-        coldMax = 9;
+        hotMin = 22;
+        mildMin = 15;
+        mildMax = 21;
+        coolMin = 8;
+        coolMax = 14;
+        coldMax = 7;
 
 
 //        hotMin = 43;
@@ -166,27 +170,27 @@ public class Weather extends AppCompatActivity {
 
 
                 if (max <= coldMax) {
-                    kidView.setImageResource(R.drawable.winter);
+                    kidView.setImageResource(R.drawable.ic_winter);
                 } else if (max < coldMax && rain) {
-                    kidView.setImageResource(R.drawable.winter_rain_snow);
+                    kidView.setImageResource(R.drawable.ic_winter_rain_snow);
                 } else if (min > coolMin && rain){
-                    kidView.setImageResource(R.drawable.cool_rain);
+                    kidView.setImageResource(R.drawable.ic_cool_rain);
                 } else if (min <= coolMin && max <= mildMin){
-                    kidView.setImageResource(R.drawable.cool_sweater);
+                    kidView.setImageResource(R.drawable.ic_cool_jacket);
                 } else if (min > coolMin && max <= mildMin){
-                    kidView.setImageResource(R.drawable.cool);
+                    kidView.setImageResource(R.drawable.ic_cool);
                 } else if (min > mildMin && rain){
-                    kidView.setImageResource(R.drawable.mild_rain);
+                    kidView.setImageResource(R.drawable.ic_mild_rain);
                 } else if (min <= mildMin && max <=hotMin){
-                    kidView.setImageResource(R.drawable.mild_jacket);
+                    kidView.setImageResource(R.drawable.ic_mild_jacket);
                 } else if (min > mildMin && max <= hotMin){
-                    kidView.setImageResource(R.drawable.mild);
+                    kidView.setImageResource(R.drawable.ic_mild);
                 } else if (min > hotMin && rain ){
-                    kidView.setImageResource(R.drawable.summer_rain);
+                    kidView.setImageResource(R.drawable.ic_summer_rain);
                 } else if (min <= hotMin && max > hotMin) {
-                    kidView.setImageResource(R.drawable.summer_jacket);
+                    kidView.setImageResource(R.drawable.ic_summer_jacket);
                 } else if (min > hotMin) {
-                    kidView.setImageResource(R.drawable.summer);
+                    kidView.setImageResource(R.drawable.ic_summer);
                 }
 
 
@@ -195,14 +199,14 @@ public class Weather extends AppCompatActivity {
                     home_weather_iconText == "&#xf019" ||
                     home_weather_iconText == "&#xf01e")
                 {
-                    umbrellaView.setImageResource(R.drawable.umbrella);
+                    umbrellaView.setImageResource(R.drawable.ic_umbrella);
                 } // for rainy day
 
                 if (!rain ||
                         home_weather_iconText == "&#xf019" ||
                         home_weather_iconText == "&#xf01e")
                 {
-                    umbrellaView.setImageResource(R.drawable.dog);
+                    umbrellaView.setImageResource(R.drawable.ic_dog);
                 } // for rainy day
 
 
@@ -216,6 +220,8 @@ public class Weather extends AppCompatActivity {
                 weatherComingHomeIcon.setText(Html.fromHtml(home_weather_iconText));
                 noonTextView.setText(noon_Time);
                 homeTextView.setText(home_Time);
+                weatherTextView.setTypeface(typefaceLorem);
+                weatherTextView.setText(current_weather_description);
             }
         });
 

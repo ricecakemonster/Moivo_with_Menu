@@ -11,7 +11,7 @@
 
     android:layout_height="match_parent"
 
-    android:background="#3F51B5"
+    android:background="#ffa500"
 
     android:orientation="vertical">
 
@@ -21,21 +21,6 @@
         android:layout_weight="0.92"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/Message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="It will rain in the afternoon. Bring your Umbrella!"
-                android:textColor="@android:color/white" />
-
-        </RelativeLayout>
-
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -43,29 +28,61 @@
             android:layout_weight=".05"
             android:orientation="horizontal">
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.30">
+                android:layout_weight="0.30"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/kidView"
-                    android:layout_width="156dp"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="35dp">
+
+                    <TextView
+                        android:id="@+id/weatherText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Weather"
+                        android:textColor="@android:color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.30"
-                    app:srcCompat="@drawable/summer" />
+                    android:layout_weight="0.30">
 
-                <ImageView
-                    android:id="@+id/umbrellaView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/umbrella" />
+                    <ImageView
+                        android:id="@+id/kidView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.70"
+                        app:srcCompat="@drawable/ic_summer" />
 
-            </GridLayout>
+                    <ImageView
+                        android:id="@+id/umbrellaView"
+                        android:layout_width="64dp"
+                        android:layout_height="365dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_dog" />
+
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="110dp"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:minHeight="119dp"
                 android:orientation="vertical"
                 android:weightSum="1">
@@ -103,7 +120,7 @@
                         android:gravity="center_horizontal"
                         android:text="Now"
                         android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray" />
+                        android:textColor="#eeeee0" />
 
                     <TextView
                         android:id="@+id/current_temperature_field"
@@ -152,7 +169,7 @@
                         android:gravity="center_horizontal"
                         android:text="2pm"
                         android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray" />
+                        android:textColor="#eeeee0" />
 
                     <TextView
                         android:id="@+id/weatherAtNoon"
@@ -200,7 +217,7 @@
                         android:gravity="center_horizontal"
                         android:text="5pm"
                         android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray" />
+                        android:textColor="#eeeee0" />
 
                     <TextView
                         android:id="@+id/weatherComingHome"
@@ -245,6 +262,9 @@
         android:layout_gravity="bottom"
         android:layout_weight="0.08"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
         app:menu="@menu/navigation" />
+
 
 </LinearLayout>

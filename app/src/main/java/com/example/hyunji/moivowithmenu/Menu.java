@@ -69,6 +69,7 @@ public class Menu extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("IsAlarmSet", false);
         editor.commit();
+//        finish();
     }
 
 }
