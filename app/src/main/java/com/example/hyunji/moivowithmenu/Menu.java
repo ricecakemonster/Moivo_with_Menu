@@ -2,7 +2,9 @@ package com.example.hyunji.moivowithmenu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -24,12 +26,17 @@ public class Menu extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.alarm:
-//                    mTextMessage.setText(R.string.title_home);
+//
+//                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//
+//                    Boolean isAlarmSet = prefs.getBoolean("IsAlarmSet",false);
+//                    Toast.makeText(Menu.this, "Is Alarm Set?" + isAlarmSet, Toast.LENGTH_SHORT).show();
 
-                        Intent alarmIntent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(alarmIntent);
-                        overridePendingTransition(0, 0);
-                        return true;
+                    Intent alarmIntent = new Intent(getBaseContext(), MainActivity.class);
+
+                    startActivity(alarmIntent);
+                    overridePendingTransition(0, 0);
+                    return true;
 
 
 
@@ -57,6 +64,11 @@ public class Menu extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("IsAlarmSet", false);
+        editor.commit();
     }
 
 }

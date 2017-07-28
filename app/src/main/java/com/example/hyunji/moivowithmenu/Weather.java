@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,8 +42,24 @@ public class Weather extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.alarm:
-//                    mTextMessage.setText(R.string.title_home);
-                    Intent alarmIntent = new Intent(getBaseContext(), MainActivity.class);
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+                    Boolean isAlarmSet = prefs.getBoolean("IsAlarmSet",false);
+                    Intent alarmIntent;
+//                    Toast.makeText(Weather.this, "Is Alarm Set?" + isAlarmSet, Toast.LENGTH_SHORT).show();
+                    if (isAlarmSet == false){
+                        Toast.makeText(Weather.this, "Alarm is not set", Toast.LENGTH_SHORT).show();
+                        alarmIntent = new Intent(getBaseContext(), MainActivity.class);
+
+
+                    } else {
+                        Toast.makeText(Weather.this, "Alarm is already set", Toast.LENGTH_SHORT).show();
+                        alarmIntent = new Intent(Weather.this, AlarmSet.class);
+
+
+                    }
+
+
                     startActivity(alarmIntent);
                     overridePendingTransition(0, 0);
                     return true;
@@ -80,7 +97,7 @@ public class Weather extends AppCompatActivity {
         Float longitude = prefs.getFloat("longitude", 0);
 
         textLine = "Latitude: " + String.valueOf(latitude) + "\n Longitude: " + String.valueOf(longitude);
-        Log.e("location in Weather: ", textLine);
+//        Log.e("location in Weather: ", textLine);
 
 
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weathericons-regular-webfont.ttf");

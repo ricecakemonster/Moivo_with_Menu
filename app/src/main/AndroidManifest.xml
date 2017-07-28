@@ -31,6 +31,8 @@
             android:exported="true"
             ></activity>
 
+    <activity android:name=".AlarmSet">
+        </activity>
         <receiver android:name=".AlarmReceiver" />
         <receiver
             android:name=".AlarmBootReceiver"

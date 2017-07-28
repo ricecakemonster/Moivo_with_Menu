@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -55,8 +58,16 @@ public class PopUp extends Activity {
                 NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 nm.cancelAll();
 
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("IsAlarmSet", false);
+                editor.commit();
+                Log.e("after popup", "Alarm is tured off");
+
             }
         });
+
+
 
     }
 

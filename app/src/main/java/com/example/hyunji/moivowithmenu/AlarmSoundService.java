@@ -121,6 +121,7 @@ public class AlarmSoundService extends Service {
 
 
             notificationManager.notify(0, notificationPopUp);
+
         }
         //if there's music playing, and the user pressed "alarm off"
         //music should stop playing

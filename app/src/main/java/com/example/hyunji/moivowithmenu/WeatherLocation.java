@@ -96,12 +96,6 @@ public class WeatherLocation extends AppCompatActivity implements LocationListen
 
         editor.commit();
 
-
-//        intent = getIntent();
-//        intent.putExtra("latitude", latitude);
-//        intent.putExtra("longitude", longitude);
-//        setResult(RESULT_OK, intent);
-//        Log.e("after intent-putExtra", "here");
         finish();
     }
 
